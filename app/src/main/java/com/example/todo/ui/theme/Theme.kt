@@ -60,7 +60,7 @@ fun TodoTheme(
     val systemUiController = rememberSystemUiController()
     SideEffect {
         if(darkTheme) {
-            systemUiController.setSystemBarsColor(DarkGray)
+            systemUiController.setSystemBarsColor(Color.Black)
             systemUiController.setNavigationBarColor(DarkGray)
         } else {
             systemUiController.setStatusBarColor(LightPrimary)

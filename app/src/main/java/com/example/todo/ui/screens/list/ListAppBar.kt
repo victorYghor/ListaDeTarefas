@@ -24,7 +24,6 @@ import com.example.todo.R
 import com.example.todo.components.PriorityItem
 import com.example.todo.data.models.Priority
 import com.example.todo.ui.theme.P_LARGE
-import com.example.todo.ui.theme.Zaffre
 import com.example.todo.ui.theme.textColor
 import com.example.todo.ui.theme.topAppBarColor
 
@@ -33,6 +32,7 @@ fun ListAppBar() {
     DefaultListAppBar(
         onSearchClicked = {},
         onSortClicked = {},
+        onDeleteClicked = {},
     )
 }
 
@@ -41,6 +41,7 @@ fun ListAppBar() {
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
+    onDeleteClicked: () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -52,7 +53,8 @@ fun DefaultListAppBar(
         actions = {
                   ListAppBarActions(
                       onSearchClicked = onSearchClicked,
-                      onSortClicked = onSortClicked
+                      onSortClicked = onSortClicked,
+                      onDeleteClicked = onDeleteClicked
                   )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = topAppBarColor),
@@ -60,20 +62,16 @@ fun DefaultListAppBar(
         )
 }
 
-@Composable
-fun ListAppBarActions(
-    onSearchClicked: () -> Unit
-) {
-    SearchAction(onSearchClicked)
-}
 
 @Composable
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
-    onSortClicked: (Priority) -> Unit
+    onSortClicked: (Priority) -> Unit,
+    onDeleteClicked: () -> Unit
 ) {
     SearchAction(onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
+    DeleteAllAction(onDeleteClicked)
 }
 
 @Composable
@@ -157,6 +155,7 @@ fun DeleteAllAction(
 fun defaultListAppBarPreview() {
     DefaultListAppBar(
         onSearchClicked = {},
-        onSortClicked = {}
+        onSortClicked = {},
+        onDeleteClicked = {}
     )
 }
