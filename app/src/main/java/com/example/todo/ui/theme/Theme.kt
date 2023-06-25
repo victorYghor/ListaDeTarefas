@@ -27,7 +27,7 @@ private val DarkColorScheme = darkColorScheme(
 private val LightColorScheme = lightColorScheme(
         primary = LightPrimary,
         secondary = PurplePastel,
-        tertiary = Zaffre
+        tertiary = LightSecondary
 
         /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -61,7 +61,7 @@ fun TodoTheme(
     SideEffect {
         if(darkTheme) {
             systemUiController.setSystemBarsColor(DarkGray)
-            systemUiController.setNavigationBarColor(Zaffre)
+            systemUiController.setNavigationBarColor(DarkGray)
         } else {
             systemUiController.setStatusBarColor(LightPrimary)
             systemUiController.setNavigationBarColor(LightPrimary)

@@ -4,7 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 //light colors
-val DarkSecondary = Color(0xFF1D1975)
+val DarkSecondary = Color(0xFF3a0ca3)
 val Zaffre = Color(0xFF240E58)
 val LightPrimary = Color(0xFFbde0fe)
 val LightSecondary = Color(0xFF036fcc)
@@ -28,10 +28,10 @@ val NonePriorityColor = Color(0xFFFFFFFF)
 
 val textColor: Color
 @Composable
-get() = if (isSystemInDarkTheme()) Color.White else Color.DarkGray
+get() = if (isSystemInDarkTheme()) Color.White else Color.Black
 val fabBackgroundColor: Color
 @Composable
 get() = if (isSystemInDarkTheme()) DarkSecondary else LightSecondary
 val topAppBarColor: Color
 @Composable
-get() = if(isSystemInDarkTheme()) Zaffre else LightPrimary
+get() = if(isSystemInDarkTheme()) DarkGray else LightPrimary
