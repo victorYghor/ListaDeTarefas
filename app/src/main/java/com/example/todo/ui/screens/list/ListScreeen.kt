@@ -52,7 +52,7 @@ fun ListFab(
         Icon(
             imageVector = Icons.Filled.Add,
             contentDescription = stringResource(R.string.add_button),
-            tint = Color.Black
+            tint = textColor
         )
     }
 }

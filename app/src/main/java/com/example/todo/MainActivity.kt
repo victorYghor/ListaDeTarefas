@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TodoTheme {
-
                 navController = rememberNavController()
                 SetupNavigation(navController = navController)
                 ListScreen(navigateToTaskScreen = {})
