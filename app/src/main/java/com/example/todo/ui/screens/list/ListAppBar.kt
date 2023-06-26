@@ -1,6 +1,7 @@
 package com.example.todo.ui.screens.list
 
 import android.app.appsearch.AppSearchManager.SearchContext
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -180,6 +181,7 @@ fun SearchAppBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(TOP_APP_BAR_HEIGHT),
+        color = topAppBarColor
     ) {
         TextField(
             value = text,
@@ -188,7 +190,7 @@ fun SearchAppBar(
             onTextChange(it)
         },
 
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().background(topAppBarColor),
 
         placeholder = {
             Text(
@@ -198,7 +200,7 @@ fun SearchAppBar(
             )
         },
             textStyle = TextStyle(
-                color = topAppBarColor,
+                color = textColor,
                 fontSize = MaterialTheme.typography.labelMedium.fontSize,
 
             ),
