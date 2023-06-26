@@ -1,3 +1,2 @@
 ### Todo
-- fix the color of search bar
-- test what is happen
+- Expose the Data base in the app
