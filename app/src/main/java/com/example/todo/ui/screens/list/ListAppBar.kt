@@ -190,7 +190,7 @@ fun SearchAppBar(
             onTextChange(it)
         },
 
-        modifier = Modifier.fillMaxWidth().background(topAppBarColor),
+        modifier = Modifier.fillMaxWidth(),
 
         placeholder = {
             Text(
@@ -208,9 +208,10 @@ fun SearchAppBar(
             leadingIcon = {
                 IconButton(
                     onClick = {},
-                    modifier = Modifier.alpha(0.8f)
+                    modifier = Modifier.alpha(0.7f)
                 ) {
-                    Icon(imageVector = Icons.Filled.Search,
+                    Icon(
+                        imageVector = Icons.Filled.Search,
                         contentDescription = stringResource(R.string.search_icon),
                         tint = textColor
                         )
@@ -236,9 +237,9 @@ fun SearchAppBar(
                 }
             ),
             colors = TextFieldDefaults.textFieldColors(
-                cursorColor = topAppBarColor,
                 focusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
+                containerColor = topAppBarColor
 
             )
         )
