@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todo.data.models.ToDoTask
 import com.example.todo.data.repositories.ToDoRepository
-import com.example.todo.ui.screens.list.SearchAppBar
 import com.example.todo.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
