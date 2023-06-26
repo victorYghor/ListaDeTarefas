@@ -3,6 +3,7 @@ package com.example.todo.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+
 //light colors
 val DarkSecondary = Color(0xFF3a0ca3)
 val LightPrimary = Color(0xFFbde0fe)
@@ -30,11 +31,11 @@ val taskItemBackgroundColor: Color
     @Composable
     get() = if (isSystemInDarkTheme()) ElevationGray else Color.White
 val textColor: Color
-@Composable
-get() = if (isSystemInDarkTheme()) Color.White else Color.Black
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.White else Color.Black
 val fabBackgroundColor: Color
-@Composable
-get() = if (isSystemInDarkTheme()) DarkSecondary else LightSecondary
+    @Composable
+    get() = if (isSystemInDarkTheme()) DarkSecondary else LightSecondary
 val topAppBarColor: Color
-@Composable
-get() = if(isSystemInDarkTheme()) DarkSecondary else LightSecondary
+    @Composable
+    get() = if (isSystemInDarkTheme()) DarkSecondary else LightSecondary
