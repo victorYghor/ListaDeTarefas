@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 //light colors
 val DarkSecondary = Color(0xFF3a0ca3)
 val LightPrimary = Color(0xFFbde0fe)
-val LightSecondary = Color(0xFF036fcc)
+val LightSecondary = Color(0xFFA0B4E8)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
