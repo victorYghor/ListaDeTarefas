@@ -10,7 +10,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -18,12 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.R
 import com.example.todo.ui.theme.*
+import com.example.todo.ui.viewModels.SharedViewModel
+import com.example.todo.util.SearchAppBarState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(
-    navigateToTaskScreen: (Int) -> Unit
+    navigateToTaskScreen: (Int) -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
+    val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
+    val searchTextState: String by sharedViewModel.searchTextState
     Scaffold(
         content = {
             Column(modifier = Modifier.padding(it)) {
@@ -31,7 +36,11 @@ fun ListScreen(
             }
         },
         topBar = {
-                 ListAppBar()
+                 ListAppBar(
+                     sharedViewModel = sharedViewModel,
+                     searchAppBarState = searchAppBarState,
+                     searchTextState = searchTextState
+                 )
         },
         floatingActionButton = {
             ListFab(navigateToTaskScreen)
@@ -55,9 +64,4 @@ fun ListFab(
             tint = textColor
         )
     }
-}
-@Composable
-@Preview
-private fun ListScreenPreview() {
-    ListScreen(navigateToTaskScreen = {})
 }

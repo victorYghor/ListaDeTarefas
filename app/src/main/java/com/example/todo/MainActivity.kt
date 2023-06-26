@@ -31,8 +31,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             TodoTheme {
                 navController = rememberNavController()
-                SetupNavigation(navController = navController)
-                ListScreen(navigateToTaskScreen = {})
+                SetupNavigation(navController = navController,
+                sharedViewModel = sharedViewModel)
+                ListScreen(navigateToTaskScreen = {},sharedViewModel = sharedViewModel)
             }
         }
     }
