@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,6 +22,7 @@ import com.example.todo.ui.viewModels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+@ExperimentalMaterial3Api
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
@@ -31,9 +33,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             TodoTheme {
                 navController = rememberNavController()
-                SetupNavigation(navController = navController,
-                sharedViewModel = sharedViewModel)
-                ListScreen(navigateToTaskScreen = {},sharedViewModel = sharedViewModel)
+                SetupNavigation(
+                    navController = navController,
+                    sharedViewModel = sharedViewModel
+                )
+                ListScreen(navigateToTaskScreen = {}, sharedViewModel = sharedViewModel)
             }
         }
     }

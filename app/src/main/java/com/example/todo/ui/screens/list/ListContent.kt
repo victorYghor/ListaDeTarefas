@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,8 +32,20 @@ import com.example.todo.ui.theme.taskItemBackgroundColor
 import com.example.todo.ui.theme.textColor
 
 @Composable
-fun ListContent() {
-
+fun ListContent(
+    tasks: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    LazyColumn() {
+        items(items = tasks,key = {
+            task -> task.id
+        }) { task ->
+            TaskItem(
+                toDoTask = task,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,12 +76,13 @@ fun TaskItem(
                     maxLines = 1,
                     modifier = Modifier.weight(8f)
                 )
-                Box(modifier = Modifier.fillMaxWidth().weight(1f),
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
                     contentAlignment = Alignment.Center
                     ) {
                     Canvas(modifier = Modifier
-                        .width(P_PRIORITY)
-                        .height(P_PRIORITY)) {
+                        .size(P_PRIORITY)) {
                         drawCircle(
                             color = toDoTask.priority.color
                         )
