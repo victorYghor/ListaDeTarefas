@@ -1,5 +1,6 @@
 package com.example.todo.ui.screens.list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -27,6 +28,16 @@ fun ListScreen(
     navigateToTaskScreen: (Int) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
+
+    LaunchedEffect(key1 = true) {
+        Log.d("ListScreen", "LauchedEffect Triggered!")
+        sharedViewModel.getAllTasks()
+    }
+    val allTasks = sharedViewModel.allTasks.collectAsState()
+
+    for(task in allTasks.value) {
+        Log.d("ListScreen", task.title)
+    }
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
     Scaffold(

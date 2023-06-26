@@ -10,6 +10,7 @@ import com.example.todo.ui.screens.list.SearchAppBar
 import com.example.todo.util.SearchAppBarState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ class SharedViewModel @Inject constructor(
 
     private val _allTasks =
         MutableStateFlow<List<ToDoTask>>(emptyList())
+    val allTasks: StateFlow<List<ToDoTask>> = _allTasks
 
     fun getAllTasks() {
         viewModelScope.launch {
