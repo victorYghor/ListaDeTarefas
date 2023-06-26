@@ -18,6 +18,7 @@ val Purple200 = Color(0xFFb794f6)
 
 val LightGray = Color(0xFFFCFCFC)
 val MediumGray = Color(0xFF9C9c9c)
+val ElevationGray = Color(0xFF555555)
 val DarkGray = Color(0xFF141414)
 
 val LowPriorityColor = Color(0xFF00C980)
@@ -25,6 +26,9 @@ val HighPriorityColor = Color(0xFFFFC114)
 val MediumPriorityColor = Color(0xFFFF4646)
 val NonePriorityColor = Color(0xFFFFFFFF)
 
+val taskItemBackgroundColor: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) ElevationGray else Color.White
 val textColor: Color
 @Composable
 get() = if (isSystemInDarkTheme()) Color.White else Color.Black
