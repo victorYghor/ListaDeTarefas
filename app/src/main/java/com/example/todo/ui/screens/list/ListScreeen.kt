@@ -28,17 +28,16 @@ fun ListScreen(
     sharedViewModel: SharedViewModel
 ) {
     LaunchedEffect(key1 = true) {
-
         sharedViewModel.getAllTasks()
     }
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
     Scaffold(
         content = {
-            ListContent(
-                tasks = allTasks,
-                navigateToTaskScreen = navigateToTaskScreen
-            )
+//            ListContent(
+//                tasks = allTasks,
+//                navigateToTaskScreen = navigateToTaskScreen
+//            )
         },
         topBar = {
                  ListAppBar(

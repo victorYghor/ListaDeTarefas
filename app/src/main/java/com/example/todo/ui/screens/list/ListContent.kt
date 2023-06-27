@@ -64,7 +64,8 @@ fun TaskItem(
             navigateToTaskScreen(toDoTask.id)
         }
         ) {
-        Column(modifier= Modifier
+        Column(
+            modifier= Modifier
             .padding(all = P_LARGE)
             .fillMaxWidth()) {
             Row {
