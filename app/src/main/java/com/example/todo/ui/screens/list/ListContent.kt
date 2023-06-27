@@ -35,7 +35,8 @@ import com.example.todo.util.RequestState
 @Composable
 fun ListContent(
     tasks: RequestState<List<ToDoTask>>,
-    navigateToTaskScreen: (taskId: Int) -> Unit
+    navigateToTaskScreen: (taskId: Int) -> Unit,
+    modifier: Modifier
 ) {
     if (tasks is RequestState.Success) {
         if (tasks.data.isEmpty()) {

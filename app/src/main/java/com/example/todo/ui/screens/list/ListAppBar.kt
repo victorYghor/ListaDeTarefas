@@ -148,6 +148,7 @@ fun SortAction(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
+            modifier = Modifier.background(topAppBarColor)
         ) {
             Priority.values().forEach {
                 DropdownMenuItem(text = { PriorityItem(priority = it) },
@@ -176,7 +177,8 @@ fun DeleteAllAction(
         )
         DropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.background(topAppBarColor)
         ) {
             DropdownMenuItem(text = {
                 Text(text = stringResource(R.string.delete_all_tasks),

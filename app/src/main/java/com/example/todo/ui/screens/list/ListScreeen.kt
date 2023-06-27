@@ -34,11 +34,12 @@ fun ListScreen(
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
     Scaffold(
-        content = {
-//            ListContent(
-//                tasks = allTasks,
-//                navigateToTaskScreen = navigateToTaskScreen
-//            )
+        content = { paddingValues ->
+            ListContent(
+                tasks = allTasks,
+                navigateToTaskScreen = navigateToTaskScreen,
+                modifier = Modifier.padding(paddingValues)
+            )
         },
         topBar = {
                  ListAppBar(

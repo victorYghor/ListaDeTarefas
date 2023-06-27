@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.R
+import com.example.todo.ui.theme.iconColors
 import com.example.todo.ui.theme.textColor
 
 @Composable
@@ -40,7 +41,7 @@ fun EmptyContent() {
             contentDescription = stringResource(
                     R.string.empty_task_icon
             ),
-            tint = textColor
+            tint = iconColors
         )
         Spacer(modifier = Modifier
             .fillMaxWidth()
