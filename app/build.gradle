@@ -6,7 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-def daggerHiltVersion = "2.36"
+def daggerHiltVersion = "2.37"
 android {
     namespace 'com.example.todo'
     compileSdk 33

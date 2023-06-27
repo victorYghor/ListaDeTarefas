@@ -30,22 +30,24 @@ import com.example.todo.ui.theme.P_PRIORITY
 import com.example.todo.ui.theme.TASK_ITEM_ELEVATION
 import com.example.todo.ui.theme.taskItemBackgroundColor
 import com.example.todo.ui.theme.textColor
+import com.example.todo.util.RequestState
 
 @Composable
 fun ListContent(
-    tasks: List<ToDoTask>,
+    tasks: RequestState<List<ToDoTask>>,
     navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
-    LazyColumn() {
-        items(items = tasks,key = {
-            task -> task.id
-        }) { task ->
-            TaskItem(
-                toDoTask = task,
+    if (tasks is RequestState.Success) {
+        if (tasks.data.isEmpty()) {
+            EmptyContent()
+        } else {
+            DisplayTasks(
+                tasks = tasks.data,
                 navigateToTaskScreen = navigateToTaskScreen
             )
         }
     }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,8 +68,8 @@ fun TaskItem(
         ) {
         Column(
             modifier= Modifier
-            .padding(all = P_LARGE)
-            .fillMaxWidth()) {
+                .padding(all = P_LARGE)
+                .fillMaxWidth()) {
             Row {
                 Text(
                     text = toDoTask.title,
@@ -100,6 +102,23 @@ fun TaskItem(
             )
         }
 
+    }
+}
+
+@Composable
+fun DisplayTasks(
+    tasks: List<ToDoTask>,
+    navigateToTaskScreen: (taskId: Int) -> Unit
+) {
+    LazyColumn() {
+        items(items = tasks,key = {
+                task -> task.id
+        }) { task ->
+            TaskItem(
+                toDoTask = task,
+                navigateToTaskScreen = navigateToTaskScreen
+            )
+        }
     }
 }
 
