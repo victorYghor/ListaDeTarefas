@@ -1,3 +1,3 @@
 ### Todo
 - ajeitar o alinhamento da empty screen
-- Change the background color of my more vert action
+- make the plus button open a new tab, and make the tasks in task list open a new screen
