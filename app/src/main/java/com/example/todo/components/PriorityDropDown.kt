@@ -1,5 +1,6 @@
 package com.example.todo.components
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -40,6 +41,7 @@ fun PriorityDropDown(
     onPrioritySelected: (Priority) -> Unit
     ) {
     var expanded by remember { mutableStateOf(false) }
+    val angle by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
     Row(modifier = Modifier
         .fillMaxWidth()
@@ -63,14 +65,14 @@ fun PriorityDropDown(
         IconButton(onClick = { expanded = true }, modifier = Modifier
             .weight(1.5f)
             .alpha(5f)
-            .rotate(0f)) {
+            .rotate(angle)) {
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
                 contentDescription = stringResource(R.string.drop_down_menu_icon)
             )
         }
         Priority.values().forEach {
-            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }, modifier = Modifier.fillMaxWidth()) {
                 DropdownMenuItem(
                     text = { PriorityItem(priority = it) },
                     onClick = {
