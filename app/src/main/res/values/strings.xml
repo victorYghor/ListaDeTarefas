@@ -15,4 +15,5 @@
     <string name="check_icon">Check Icon</string>
     <string name="update_icon">update icon</string>
     <string name="delete_icon">Delete Icon</string>
+    <string name="drop_down_menu_icon">Drop down menu icon</string>
 </resources>
