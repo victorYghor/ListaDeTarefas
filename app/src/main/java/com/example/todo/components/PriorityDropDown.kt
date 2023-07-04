@@ -38,21 +38,24 @@ import com.example.todo.ui.theme.topAppBarColor
 @Composable
 fun PriorityDropDown(
     priority: Priority,
-    onPrioritySelected: (Priority) -> Unit
+    onPrioritySelected: (Priority) -> Unit,
+    modifier: Modifier
     ) {
     var expanded by remember { mutableStateOf(false) }
     val angle by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
-    Row(modifier = Modifier
+    Row(modifier = modifier
         .fillMaxWidth()
         .height(TOP_APP_BAR_HEIGHT)
         .clickable(onClick = { expanded = true })
         .border(
             width = 1.dp,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f)
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
+            shape = MaterialTheme.shapes.small
         )
         .background(topAppBarColor),
         verticalAlignment = Alignment.CenterVertically
+
     ) {
         Canvas(modifier = Modifier
             .size(P_PRIORITY)
@@ -72,7 +75,11 @@ fun PriorityDropDown(
             )
         }
         Priority.values().forEach {
-            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }, modifier = Modifier.fillMaxWidth()) {
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.fillMaxWidth(fraction = 0.90f)
+            ) {
                 DropdownMenuItem(
                     text = { PriorityItem(priority = it) },
                     onClick = {
@@ -90,5 +97,5 @@ fun PriorityDropDown(
 @Composable
 @Preview
 fun PriorityDropDownMenu() {
-    PriorityDropDown(priority = Priority.HIGH, onPrioritySelected = {})
+    PriorityDropDown(priority = Priority.HIGH, onPrioritySelected = {}, modifier = Modifier)
 }

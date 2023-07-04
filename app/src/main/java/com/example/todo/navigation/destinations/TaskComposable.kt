@@ -30,7 +30,10 @@ fun NavGraphBuilder.taskComposable(
         val selectedTask by sharedViewModel.selectedTask.collectAsState()
         sharedViewModel.getSelectedTask(taskId = taskId)
         Log.d("TaskComposable", taskId.toString())
-        TaskScreen(navigateToListScreen = navigateToListScreen,
-        selectedTask = selectedTask)
+        TaskScreen(
+            navigateToListScreen = navigateToListScreen,
+            selectedTask = selectedTask,
+            sharedViewModel = SharedViewModel
+        )
     }
 }
