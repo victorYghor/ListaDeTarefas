@@ -71,7 +71,8 @@ fun PriorityDropDown(
         Text(text = priority.name, color = textColor, modifier = Modifier.weight(8f))
 
         IconButton(
-            onClick = { expanded = true }, modifier = Modifier
+            onClick = { expanded = true },
+            modifier = Modifier
                 .weight(1.5f)
                 .alpha(5f)
                 .rotate(angle)
@@ -81,25 +82,20 @@ fun PriorityDropDown(
                 contentDescription = stringResource(R.string.drop_down_menu_icon)
             )
         }
-        Priority.values().forEach {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth(fraction = 0.90f)
-            ) {
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    modifier = Modifier.fillMaxWidth(fraction = 0.90f)
-                ) {
-                    DropdownMenuItem(
-                        text = { PriorityItem(priority = it) },
-                        onClick = {
-                            expanded = false
-                            onPrioritySelected(it)
-                        }
-                    )
-                }
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.fillMaxWidth(fraction = 0.94f)
+        ) {
+            Priority.values().forEach {
+                DropdownMenuItem(
+                    text = { PriorityItem(priority = it) },
+                    onClick = {
+                        expanded = false
+                        onPrioritySelected(it)
+                    }
+                )
             }
         }
     }
