@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
-    ): ViewModel() {
+) : ViewModel() {
 
     val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
 
@@ -52,11 +52,12 @@ class SharedViewModel @Inject constructor(
                     _allTasks.value = RequestState.Success(it)
                 }
             }
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             _allTasks.value = RequestState.Error(e)
         }
 
     }
+
     private val _selectedTask: MutableStateFlow<ToDoTask?> = MutableStateFlow(null)
     val selectedTask: StateFlow<ToDoTask?> = _selectedTask
 
@@ -79,29 +80,59 @@ class SharedViewModel @Inject constructor(
         }
     }
 
+    private fun updateTask() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val toDoTask = ToDoTask(
+                id = id.value,
+                title = title.value,
+                description = description.value,
+                priority = priority.value
+            )
+            repository.updateTask(toDoTask = toDoTask)
+        }
+    }
+
+    private fun deleteTask() {
+        viewModelScope.launch {
+            val toDoTask = ToDoTask(
+                id = id.value,
+                title = title.value,
+                description = description.value,
+                priority = priority.value
+            )
+            repository.deleteTask(toDoTask = toDoTask)
+        }
+    }
+
     fun handleDatabaseActions(action: Action) {
         when (action) {
             Action.ADD -> {
                 addTask()
             }
-            Action.UPDATE -> {
 
+            Action.UPDATE -> {
+                updateTask()
             }
+
             Action.DELETE -> {
 
             }
+
             Action.DELETE_ALL -> {
 
             }
+
             Action.UNDO -> {
 
             }
+
             else -> {
 
             }
         }
         this.action.value = Action.NO_ACTION
     }
+
     fun updateTaskFields(selectedTask: ToDoTask?) {
         if (selectedTask != null) {
             id.value = selectedTask.id

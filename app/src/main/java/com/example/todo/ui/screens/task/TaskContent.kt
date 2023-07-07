@@ -3,6 +3,7 @@ package com.example.todo.ui.screens.task
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,7 +38,7 @@ fun TaskContent(
     onDescriptionChange: (String) -> Unit,
     priority: Priority,
     onPrioritySelected: (Priority) -> Unit,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     Column(
         modifier = Modifier
@@ -83,6 +84,6 @@ private fun TaskContentPreview() {
         onDescriptionChange = {},
         priority = Priority.HIGH,
         onPrioritySelected = {},
-        modifier = Modifier
+        modifier = Modifier,
     )
 }

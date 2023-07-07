@@ -30,7 +30,8 @@ import com.example.todo.util.Action
 @Composable
 fun TaskAppBar(
     navigateToListScreen: (Action) -> Unit,
-    selectedTask: ToDoTask?
+    selectedTask: ToDoTask?,
+    modifier: Modifier = Modifier
 ) {
     if (selectedTask == null) {
         NewTaskAppBar(navigateToListScreen = navigateToListScreen)

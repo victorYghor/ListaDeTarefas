@@ -2,6 +2,8 @@ package com.example.todo.ui.screens.task
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -9,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.example.todo.R
 import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoTask
@@ -44,7 +47,8 @@ fun TaskScreen(
                             displayToast(context = context)
                         }
                     }
-                }
+                },
+                modifier = Modifier
             )
         },
         content = { paddingValues ->
@@ -61,9 +65,9 @@ fun TaskScreen(
                 onPrioritySelected = {
                     sharedViewModel.priority.value = it
                 },
-                modifier = Modifier.padding(paddingValues = paddingValues)
+                modifier = Modifier.padding(paddingValues).navigationBarsPadding(),
             )
-        }
+        },
     )
 }
 fun displayToast(context: Context) {
