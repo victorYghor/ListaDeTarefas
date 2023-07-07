@@ -16,7 +16,6 @@ import com.example.todo.ui.viewModels.SharedViewModel
 import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
 import kotlinx.coroutines.launch
-import
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,25 +76,25 @@ fun ListFab(
     }
 }
 // devs android que quiserem me socorrer, estou aceitando
-@Composable
-fun DisplaySnackBar(
-    scaffoldState: ScaffoldState,
-    handleDatabaseActions: () -> Unit,
-    taskTitle: String,
-    action: Action
-) {
-
-    handleDatabaseActions()
-
-    val scope = rememberCoroutineScope()
-    LaunchedEffect(key1 = action) {
-        if (action != Action.NO_ACTION) {
-            this.launch {
-//                val snackBarResult = scaffoldState.snackBarHostState.showSnackBar(
-            //                message = "${action.name}: $taskTitle", actionLabel = "OK"
-            //                )
-                // is not possible to use this because this parameter of this type do not exist
-            }
-        }
-    }
-}
+//@Composable
+//fun DisplaySnackBar(
+//    scaffoldState: ScaffoldState,
+//    handleDatabaseActions: () -> Unit,
+//    taskTitle: String,
+//    action: Action
+//) {
+//
+//    handleDatabaseActions()
+//
+//    val scope = rememberCoroutineScope()
+//    LaunchedEffect(key1 = action) {
+//        if (action != Action.NO_ACTION) {
+//            this.launch {
+////                val snackBarResult = scaffoldState.snackBarHostState.showSnackBar(
+//            //                message = "${action.name}: $taskTitle", actionLabel = "OK"
+//            //                )
+//                // is not possible to use this because this parameter of this type do not exist
+//            }
+//        }
+//    }
+//}
