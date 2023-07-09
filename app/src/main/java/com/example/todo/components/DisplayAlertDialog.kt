@@ -9,7 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.todo.R
+import com.example.todo.ui.theme.secondaryColor
 import com.example.todo.ui.theme.textColor
+import com.example.todo.ui.theme.topAppBarColor
+
 @Composable
 fun DisplayAlertDialog(
     title: String,
@@ -62,9 +65,12 @@ fun DisplayAlertDialog(
                         )
                 }
             },
+
             onDismissRequest = {
                 closeDialog()
-            }
+            },
+            iconContentColor = topAppBarColor,
+            containerColor = secondaryColor
         )
     }
 }

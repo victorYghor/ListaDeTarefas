@@ -2,6 +2,7 @@ package com.example.todo.ui.screens.task
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -15,10 +16,12 @@ import androidx.compose.ui.unit.dp
 import com.example.todo.R
 import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoTask
+import com.example.todo.ui.theme.DarkGray
 import com.example.todo.ui.viewModels.SharedViewModel
 import com.example.todo.util.Action
 
 // it will be implement something in the future
+// this is the screen of task
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskScreen(
@@ -65,7 +68,9 @@ fun TaskScreen(
                 onPrioritySelected = {
                     sharedViewModel.priority.value = it
                 },
-                modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
+                modifier = Modifier
+                    .padding(top = paddingValues.calculateTopPadding())
+                    .background(DarkGray),
             )
         },
     )
