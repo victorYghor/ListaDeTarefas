@@ -143,7 +143,7 @@ class SharedViewModel @Inject constructor(
             }
 
             Action.DELETE -> {
-
+                deleteTask()
             }
 
             Action.DELETE_ALL -> {

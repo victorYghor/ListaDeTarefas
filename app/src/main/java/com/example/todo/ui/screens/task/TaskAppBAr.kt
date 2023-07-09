@@ -68,7 +68,8 @@ fun NewTaskAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistingTaskAppBar(
-
+    navigateToListScreen: (Action) -> Unit,
+    selectedTask: ToDoTask
 ) {
     TopAppBar(
         navigationIcon = {
@@ -84,6 +85,10 @@ fun ExistingTaskAppBar(
         },
         modifier = Modifier.background(topAppBarColor),
         actions = {
+            ExistingTaskAppBarActions(
+                selectedTask = selectedTask,
+                navigateToListScreen = navigateToListScreen
+            )
 
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = topAppBarColor)
@@ -104,7 +109,7 @@ fun CloseAction(
 }
 
 @Composable
-fun ExistingTaskAppBarAction(
+fun ExistingTaskAppBarActions(
     navigateToListScreen: (Action) -> Unit,
     selectedTask: ToDoTask
 ) {
@@ -112,9 +117,21 @@ fun ExistingTaskAppBarAction(
         mutableStateOf(false)
     }
     DisplayAlertDialog(
-        title =
+        title = stringResource(
+            id = R.string.delete_task,
+            selectedTask.title
+        ),
+        message = stringResource(
+            id = R.string.delete_task_confirmation,
+            selectedTask.title
+        ),
+        openDialog = openDialog,
+        closeDialog = { openDialog = false },
+        onYesClicked = { navigateToListScreen(Action.DELETE) }
     )
-    DeleteAction(onDeleteClicked = navigateToListScreen)
+    DeleteAction(onDeleteClicked = {
+        openDialog = true
+    })
     UpdateAction(onUpdateClicked = navigateToListScreen)
 }
 

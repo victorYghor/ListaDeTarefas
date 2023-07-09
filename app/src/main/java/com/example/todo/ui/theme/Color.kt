@@ -27,6 +27,9 @@ val HighPriorityColor = Color(0xFFFF4646)
 val MediumPriorityColor = Color(0xFFFFC114)
 val NonePriorityColor = Color(0xFFFFFFFF)
 
+val dialogTextColor: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) ElevationGray else MediumGray
 val iconColors: Color
     @Composable
     get() = if (isSystemInDarkTheme()) LightGray else DarkGray

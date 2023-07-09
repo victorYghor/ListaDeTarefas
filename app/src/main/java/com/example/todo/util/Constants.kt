@@ -9,5 +9,5 @@ object Constants {
 
     const val LIST_ARGUMENT_KEY = "action"
     const val TASK_ARGUMENT_KEY = "taskId"
-    const val MAX_TITLE_LENGTH = 30
+    const val MAX_TITLE_LENGTH = 100
 }
