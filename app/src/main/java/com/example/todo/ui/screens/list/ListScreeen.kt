@@ -13,9 +13,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.todo.R
 import com.example.todo.ui.theme.*
 import com.example.todo.ui.viewModels.SharedViewModel
-import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,6 +28,7 @@ fun ListScreen(
     val action by sharedViewModel.action
 
     val allTasks by sharedViewModel.allTasks.collectAsState()
+    val searchedTasks by sharedViewModel.searchedTasks.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
 
@@ -38,19 +37,21 @@ fun ListScreen(
 
 
     Scaffold(
-        content = { paddingValues ->
-            ListContent(
-                tasks = allTasks,
-                navigateToTaskScreen = navigateToTaskScreen,
-                modifier = Modifier.padding(paddingValues)
-            )
-        },
         topBar = {
                  ListAppBar(
                      sharedViewModel = sharedViewModel,
                      searchAppBarState = searchAppBarState,
                      searchTextState = searchTextState
                  )
+        },
+        content = { paddingValues ->
+            ListContent(
+                allTasks = allTasks,
+                navigateToTaskScreen = navigateToTaskScreen,
+                modifier = Modifier.padding(paddingValues),
+                searchedTasks = searchedTasks,
+                searchAppBarState = searchAppBarState
+            )
         },
         floatingActionButton = {
             ListFab(navigateToTaskScreen)

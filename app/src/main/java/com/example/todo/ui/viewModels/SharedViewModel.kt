@@ -16,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,6 +43,26 @@ class SharedViewModel @Inject constructor(
     val allTasks: StateFlow<RequestState<List<ToDoTask>>> = _allTasks
     // for some reason, this line of code is broken in my project
 //    val allTasks: StateFlow<List<ToDoTask>> = _allTasks
+
+    private val _searchedTasks =
+        MutableStateFlow<RequestState<List<ToDoTask>>>(RequestState.Idle)
+    val searchedTasks: StateFlow<RequestState<List<ToDoTask>>> = _searchedTasks
+
+    fun searchDatabase(searchQuery: String) {
+        _searchedTasks.value = RequestState.Loading
+
+        try {
+            viewModelScope.launch {
+                repository.searchDatabase(searchQuery = "%$searchQuery%")
+                    .collect { searchedTasks ->
+                        _searchedTasks.value = RequestState.Success(searchedTasks)
+                    }
+            }
+        } catch (e: Exception) {
+            _searchedTasks.value = RequestState.Error(e)
+        }
+        searchAppBarState.value = SearchAppBarState.TRIGGERED
+    }
 
     fun getAllTasks() {
         _allTasks.value = RequestState.Loading
@@ -78,6 +99,7 @@ class SharedViewModel @Inject constructor(
             )
             repository.addTask(toDoTask = toDoTask)
         }
+        searchAppBarState.value
     }
 
     private fun updateTask() {
