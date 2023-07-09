@@ -65,7 +65,7 @@ fun TaskScreen(
                 onPrioritySelected = {
                     sharedViewModel.priority.value = it
                 },
-                modifier = Modifier.padding(paddingValues.calculateTopPadding()),
+                modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
             )
         },
     )

@@ -41,10 +41,9 @@ fun TaskContent(
     modifier: Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .background(topAppBarColor)
-            .padding(all = P_LARGE),
+            .background(topAppBarColor),
 
     ) {
         OutlinedTextField(
