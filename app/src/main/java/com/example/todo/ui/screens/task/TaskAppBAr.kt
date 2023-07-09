@@ -14,13 +14,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.room.Delete
 import com.example.todo.R
+import com.example.todo.components.DisplayAlertDialog
 import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoTask
 import com.example.todo.ui.theme.textColor
@@ -66,8 +68,7 @@ fun NewTaskAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistingTaskAppBar(
-    navigateToListScreen: (Action) -> Unit,
-    selectedTask: ToDoTask
+
 ) {
     TopAppBar(
         navigationIcon = {
@@ -83,8 +84,7 @@ fun ExistingTaskAppBar(
         },
         modifier = Modifier.background(topAppBarColor),
         actions = {
-            DeleteAction(onDeleteClicked = navigateToListScreen)
-            UpdateAction(onUpdateClicked = navigateToListScreen)
+
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = topAppBarColor)
     )
@@ -101,6 +101,21 @@ fun CloseAction(
             tint = textColor
         )
     }
+}
+
+@Composable
+fun ExistingTaskAppBarAction(
+    navigateToListScreen: (Action) -> Unit,
+    selectedTask: ToDoTask
+) {
+    var openDialog by remember {
+        mutableStateOf(false)
+    }
+    DisplayAlertDialog(
+        title =
+    )
+    DeleteAction(onDeleteClicked = navigateToListScreen)
+    UpdateAction(onUpdateClicked = navigateToListScreen)
 }
 
 @Composable

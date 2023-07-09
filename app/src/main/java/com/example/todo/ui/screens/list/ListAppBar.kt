@@ -1,6 +1,5 @@
 package com.example.todo.ui.screens.list
 
-import android.app.appsearch.AppSearchManager.SearchContext
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,9 +14,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -35,7 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.todo.R
 import com.example.todo.components.PriorityItem
 import com.example.todo.data.models.Priority
@@ -44,6 +40,7 @@ import com.example.todo.ui.theme.TOP_APP_BAR_HEIGHT
 import com.example.todo.ui.theme.textColor
 import com.example.todo.ui.theme.topAppBarColor
 import com.example.todo.ui.viewModels.SharedViewModel
+import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
 import com.example.todo.util.TrailingIconState
 
@@ -60,7 +57,9 @@ fun ListAppBar(
                                   sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
                 },
                 onSortClicked = {},
-                onDeleteClicked = {},
+                onDeleteAllClicked = {
+                                  sharedViewModel.action.value = Action.DELETE_ALL
+                },
             )
         }
         else -> {
@@ -86,7 +85,7 @@ fun ListAppBar(
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -99,7 +98,7 @@ fun DefaultListAppBar(
                   ListAppBarActions(
                       onSearchClicked = onSearchClicked,
                       onSortClicked = onSortClicked,
-                      onDeleteClicked = onDeleteClicked
+                      onDeleteAllClicked = onDeleteAllClicked
                   )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = topAppBarColor),
@@ -112,11 +111,11 @@ fun DefaultListAppBar(
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     SearchAction(onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
-    DeleteAllAction(onDeleteClicked)
+    DeleteAllAction(onDeleteAllClicked)
 }
 
 @Composable
@@ -299,7 +298,7 @@ fun defaultListAppBarPreview() {
     DefaultListAppBar(
         onSearchClicked = {},
         onSortClicked = {},
-        onDeleteClicked = {}
+        onDeleteAllClicked = {}
     )
 }
 @Composable

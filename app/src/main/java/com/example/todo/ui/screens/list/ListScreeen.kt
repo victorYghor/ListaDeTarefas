@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.todo.R
 import com.example.todo.ui.theme.*
 import com.example.todo.ui.viewModels.SharedViewModel
+import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,6 +75,13 @@ fun ListFab(
             contentDescription = stringResource(R.string.add_button),
             tint = textColor
         )
+    }
+}
+
+private fun setMessage(action: Action, taskTitle: String): String {
+    return when (action) {
+        Action.DELETE_ALL -> "All Tasks Removed."
+        else -> "${action.name}: $taskTitle"
     }
 }
 // devs android que quiserem me socorrer, estou aceitando
