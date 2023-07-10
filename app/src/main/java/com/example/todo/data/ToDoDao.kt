@@ -18,7 +18,7 @@ interface ToDoDao {
     @Query("SELECT * FROM todo_table WHERE id=:taskId")
     fun getSelectedTask(taskId: Int): Flow<ToDoTask>
 
-    // IF A ERROR EXIST MAYBE THIS
+    // IF A ERROR EXIST MAYBE THIS IS THE CAUSE
     @Upsert
     suspend fun addTask(toDoTask: ToDoTask)
 

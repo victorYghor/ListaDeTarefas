@@ -171,11 +171,13 @@ fun SortAction(
             modifier = Modifier.background(topAppBarColor)
         ) {
             Priority.values().forEach {
-                DropdownMenuItem(text = { PriorityItem(priority = it) },
-                    onClick = {
-                        expanded = false
-                        onSortClicked(it)
-                    })
+                if (it != Priority.MEDIUM) {
+                    DropdownMenuItem(text = { PriorityItem(priority = it) },
+                        onClick = {
+                            expanded = false
+                            onSortClicked(it)
+                        })
+                }
             }
         }
     }
