@@ -1,6 +1,7 @@
 package com.example.todo.ui.screens.list
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,6 +16,7 @@ import com.example.todo.ui.theme.*
 import com.example.todo.ui.viewModels.SharedViewModel
 import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,12 +26,16 @@ fun ListScreen(
 ) {
     LaunchedEffect(key1 = true) {
         sharedViewModel.getAllTasks()
+        sharedViewModel.readSortState()
     }
 
     val action by sharedViewModel.action
 
     val allTasks by sharedViewModel.allTasks.collectAsState()
     val searchedTasks by sharedViewModel.searchedTasks.collectAsState()
+    val sortState by sharedViewModel.sortState.collectAsState()
+    val lowPriorityTasks by sharedViewModel.lowPriorityTasks().collectAsState()
+    val highPriorityTasks by sharedViewModel.highPriorityTasks().collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
 
@@ -51,7 +57,10 @@ fun ListScreen(
                 navigateToTaskScreen = navigateToTaskScreen,
                 modifier = Modifier.padding(paddingValues),
                 searchedTasks = searchedTasks,
-                searchAppBarState = searchAppBarState
+                searchAppBarState = searchAppBarState,
+                lowPriorityTasks = lowPriorityTasks,
+                highPriorityTasks = highPriorityTasks,
+                sortState = sortState
             )
         },
         floatingActionButton = {
@@ -84,26 +93,25 @@ private fun setMessage(action: Action, taskTitle: String): String {
         else -> "${action.name}: $taskTitle"
     }
 }
-// devs android que quiserem me socorrer, estou aceitando
-//@Composable
-//fun DisplaySnackBar(
-//    scaffoldState: ScaffoldState,
-//    handleDatabaseActions: () -> Unit,
-//    taskTitle: String,
-//    action: Action
-//) {
-//
-//    handleDatabaseActions()
-//
-//    val scope = rememberCoroutineScope()
-//    LaunchedEffect(key1 = action) {
-//        if (action != Action.NO_ACTION) {
-//            this.launch {
-////                val snackBarResult = scaffoldState.snackBarHostState.showSnackBar(
-//            //                message = "${action.name}: $taskTitle", actionLabel = "OK"
-//            //                )
-//                // is not possible to use this because this parameter of this type do not exist
-//            }
-//        }
-//    }
-//}
+
+@Composable
+fun DisplaySnackBar(
+    scaffoldState: ScaffoldState,
+    handleDatabaseActions: () -> Unit,
+    taskTitle: String,
+    action: Action
+) {
+
+    handleDatabaseActions()
+
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(key1 = action) {
+        if (action != Action.NO_ACTION) {
+            this.launch {
+                val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
+                            message = "${action.name}: $taskTitle", actionLabel = "OK"
+                            )
+            }
+        }
+    }
+}

@@ -36,8 +36,10 @@ fun ListContent(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     modifier: Modifier,
     searchedTasks: RequestState<List<ToDoTask>>,
-    searchAppBarState: SearchAppBarState
+    searchAppBarState: SearchAppBarState,
+    lowPriorityTasks:
 ) {
+    if(sortState is RequestState.Success)
     if (searchAppBarState == SearchAppBarState.TRIGGERED) {
         if (searchedTasks is RequestState.Success) {
             HandleListContent(
