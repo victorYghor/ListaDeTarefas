@@ -91,6 +91,9 @@ dependencies {
 
     // System UI - Accompanist
    implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta"
+
+    // data store preferences
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
 
 kapt {

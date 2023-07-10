@@ -89,13 +89,15 @@ fun PriorityDropDown(
             modifier = Modifier.fillMaxWidth(fraction = 0.94f)
         ) {
             Priority.values().forEach {
-                DropdownMenuItem(
-                    text = { PriorityItem(priority = it) },
-                    onClick = {
-                        expanded = false
-                        onPrioritySelected(it)
-                    }
-                )
+                if (it != Priority.MEDIUM){
+                    DropdownMenuItem(
+                        text = { PriorityItem(priority = it) },
+                        onClick = {
+                            expanded = false
+                            onPrioritySelected(it)
+                        }
+                    )
+                }
             }
         }
     }
