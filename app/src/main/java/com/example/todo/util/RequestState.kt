@@ -6,3 +6,7 @@ sealed class RequestState<out T> {
     data class Success<T>(val data: T): RequestState<T>()
     data class Error(val error: Throwable): RequestState<Nothing>()
 }
+
+class random(data: String): RequestState<String>() {
+
+}
