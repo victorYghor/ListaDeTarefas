@@ -43,7 +43,7 @@ fun TaskContent(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(topAppBarColor)
+            .background(MaterialTheme.colorScheme.background)
             .padding(P_LARGE),
 
     ) {
@@ -55,7 +55,7 @@ fun TaskContent(
             textStyle = MaterialTheme.typography.bodyLarge,
             singleLine = true,
         )
-        Spacer(modifier = Modifier.fillMaxWidth().height(P_LARGE).background(topAppBarColor))
+        Spacer(modifier = Modifier.fillMaxWidth().height(P_LARGE).background(MaterialTheme.colorScheme.background))
         PriorityDropDown(
             priority = priority,
             onPrioritySelected = onPrioritySelected,

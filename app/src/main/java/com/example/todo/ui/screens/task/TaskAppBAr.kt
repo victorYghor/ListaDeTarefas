@@ -107,7 +107,6 @@ fun CloseAction(
         )
     }
 }
-
 @Composable
 fun ExistingTaskAppBarActions(
     navigateToListScreen: (Action) -> Unit,

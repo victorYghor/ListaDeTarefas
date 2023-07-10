@@ -56,7 +56,7 @@ fun PriorityDropDown(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
                 shape = MaterialTheme.shapes.small
             )
-            .background(topAppBarColor),
+            .background(MaterialTheme.colorScheme.background),
         verticalAlignment = Alignment.CenterVertically
 
     ) {
