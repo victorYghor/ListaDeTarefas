@@ -1,6 +1,10 @@
 package com.example.todo.ui.screens.list
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -50,6 +54,8 @@ import com.example.todo.ui.theme.textColor
 import com.example.todo.util.Action
 import com.example.todo.util.RequestState
 import com.example.todo.util.SearchAppBarState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListContent(
@@ -210,7 +216,10 @@ fun DisplayTasks(
             val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
 
             if (isDismissed && dismissDirection == DismissDirection.EndToStart) {
-                onSwipeToDelete(Action.DELETE, task)
+                LaunchedEffect(key1 = true){
+                    delay(300)
+                    onSwipeToDelete(Action.DELETE, task)
+                }
             }
 
             val degrees by animateFloatAsState(
@@ -219,18 +228,40 @@ fun DisplayTasks(
                 else
                     -45f
             )
-            SwipeToDismiss(
-                state = dismissState,
-                directions = setOf(DismissDirection.EndToStart),
-                background = { RedBackground(degrees = degrees)},
-                dismissThresholds = { FractionalThreshold(0.2f) },
-                dismissContent = {
-                    TaskItem(
-                        toDoTask = task,
-                        navigateToTaskScreen = navigateToTaskScreen
+
+
+            var itemAppeared by remember {
+                mutableStateOf(false)
+            }
+            LaunchedEffect(key1 = true) {
+                itemAppeared = true
+            }
+            AnimatedVisibility(
+                visible = itemAppeared && !isDismissed,
+                enter = expandVertically(
+                    animationSpec = tween(
+                        durationMillis = 300
                     )
-                }
-            )
+                ),
+                exit = shrinkVertically(
+                    animationSpec = tween(
+                        durationMillis = 300
+                    )
+                )
+            ) {
+                SwipeToDismiss(
+                    state = dismissState,
+                    directions = setOf(DismissDirection.EndToStart),
+                    background = { RedBackground(degrees = degrees)},
+                    dismissThresholds = { FractionalThreshold(0.2f) },
+                    dismissContent = {
+                        TaskItem(
+                            toDoTask = task,
+                            navigateToTaskScreen = navigateToTaskScreen
+                        )
+                    }
+                )
+            }
 
         }
     }
