@@ -25,4 +25,5 @@
     <string name="delete_task_confirmation">Are you sure you want to remove \'%1$s\'?</string>
     <string name="delete_all_tasks_question">Delete all tasks?</string>
     <string name="you_sure_that_you_want_delete_all_tasks">You sure that you want delete all tasks? There is no going back after this action.</string>
+    <string name="logo_of_the_app">Logo of the App</string>
 </resources>
