@@ -3,6 +3,7 @@ package com.example.todo.ui.screens.list
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.rememberScaffoldState
@@ -23,7 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListScreen(
     navigateToTaskScreen: (Int) -> Unit,
-    sharedViewModel: SharedViewModel
+    sharedViewModel: SharedViewModel,
 ) {
     LaunchedEffect(key1 = true) {
         sharedViewModel.getAllTasks()
@@ -48,7 +49,10 @@ fun ListScreen(
         scaffoldState = scaffoldState,
         handleDatabaseActions = { sharedViewModel.handleDatabaseActions(action = action) },
         taskTitle = sharedViewModel.title.value,
-        action = action
+        action = action,
+        onUndoClicked = {
+            sharedViewModel.action.value = it
+        }
     )
 
     Scaffold(
@@ -87,7 +91,8 @@ fun DisplaySnackBar(
     scaffoldState: ScaffoldState,
     handleDatabaseActions: () -> Unit,
     taskTitle: String,
-    action: Action
+    action: Action,
+    onUndoClicked: (Action) -> Unit
 ) {
 
     handleDatabaseActions()
@@ -97,7 +102,12 @@ fun DisplaySnackBar(
         if (action != Action.NO_ACTION) {
             scope.launch {
                 val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
-                    message = "${action.name}: $taskTitle", actionLabel = "OK"
+                    message = setMessage(action, taskTitle), actionLabel = setActionLabel(action)
+                )
+                undoDeletedTask(
+                    action = action,
+                    snackBarResult = snackBarResult,
+                    onUndoClicked = onUndoClicked
                 )
             }
         }
@@ -126,5 +136,22 @@ private fun setMessage(action: Action, taskTitle: String): String {
     return when (action) {
         Action.DELETE_ALL -> "All Tasks Removed."
         else -> "${action.name}: $taskTitle"
+    }
+}
+
+private fun setActionLabel(action: Action): String {
+    return if (action.name == "DELETE") "UNDO" else "OK"
+}
+
+private fun undoDeletedTask(
+    action: Action,
+    snackBarResult: SnackbarResult,
+    onUndoClicked: (Action) -> Unit
+) {
+    if (
+        snackBarResult == SnackbarResult.ActionPerformed
+        && action == Action.DELETE
+    ) {
+        onUndoClicked(Action.UNDO)
     }
 }
