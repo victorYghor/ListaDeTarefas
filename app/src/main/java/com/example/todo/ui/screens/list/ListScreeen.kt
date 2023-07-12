@@ -1,6 +1,7 @@
 package com.example.todo.ui.screens.list
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -8,7 +9,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -78,7 +78,30 @@ fun ListScreen(
         floatingActionButton = {
             ListFab(navigateToTaskScreen)
         },
+        scaffoldState = scaffoldState
     )
+}
+
+@Composable
+fun DisplaySnackBar(
+    scaffoldState: ScaffoldState,
+    handleDatabaseActions: () -> Unit,
+    taskTitle: String,
+    action: Action
+) {
+
+    handleDatabaseActions()
+
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(key1 = action) {
+        if (action != Action.NO_ACTION) {
+            scope.launch {
+                val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
+                    message = "${action.name}: $taskTitle", actionLabel = "OK"
+                )
+            }
+        }
+    }
 }
 
 @Composable
@@ -103,27 +126,5 @@ private fun setMessage(action: Action, taskTitle: String): String {
     return when (action) {
         Action.DELETE_ALL -> "All Tasks Removed."
         else -> "${action.name}: $taskTitle"
-    }
-}
-
-@Composable
-fun DisplaySnackBar(
-    scaffoldState: ScaffoldState,
-    handleDatabaseActions: () -> Unit,
-    taskTitle: String,
-    action: Action
-) {
-
-    handleDatabaseActions()
-
-    val scope = rememberCoroutineScope()
-    LaunchedEffect(key1 = action) {
-        if (action != Action.NO_ACTION) {
-            this.launch {
-                val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
-                            message = "${action.name}: $taskTitle", actionLabel = "OK"
-                            )
-            }
-        }
     }
 }
