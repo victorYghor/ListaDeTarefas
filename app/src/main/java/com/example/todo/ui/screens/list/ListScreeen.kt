@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -40,7 +41,15 @@ fun ListScreen(
     val lowPriorityTasks by sharedViewModel.lowPriorityTasks().collectAsState()
     val highPriorityTasks by sharedViewModel.highPriorityTasks().collectAsState()
 
-    sharedViewModel.handleDatabaseActions(action = action)
+    val scaffoldState = rememberScaffoldState()
+
+    
+    DisplaySnackBar(
+        scaffoldState = scaffoldState,
+        handleDatabaseActions = { sharedViewModel.handleDatabaseActions(action = action) },
+        taskTitle = sharedViewModel.title.value,
+        action = action
+    )
 
     Scaffold(
         topBar = {

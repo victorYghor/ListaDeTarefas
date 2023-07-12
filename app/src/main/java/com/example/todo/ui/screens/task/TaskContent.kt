@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -27,6 +28,7 @@ import com.example.todo.R
 import com.example.todo.components.PriorityDropDown
 import com.example.todo.data.models.Priority
 import com.example.todo.ui.theme.P_LARGE
+import com.example.todo.ui.theme.P_MEDIUM
 import com.example.todo.ui.theme.topAppBarColor
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,21 +57,28 @@ fun TaskContent(
             textStyle = MaterialTheme.typography.bodyLarge,
             singleLine = true,
         )
-        Spacer(modifier = Modifier.fillMaxWidth().height(P_LARGE).background(MaterialTheme.colorScheme.background))
+        Spacer(modifier = Modifier.fillMaxWidth().height(P_MEDIUM).background(MaterialTheme.colorScheme.background))
         PriorityDropDown(
             priority = priority,
             onPrioritySelected = onPrioritySelected,
             modifier = Modifier.border(width = 1.dp, brush = Brush.horizontalGradient(listOf(Color.DarkGray, Color.DarkGray)), shape = RectangleShape)
         )
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(P_MEDIUM)
+                .background(MaterialTheme.colorScheme.background)
+        )
         OutlinedTextField(
             value = description,
-            modifier = Modifier
-                .fillMaxSize()
-                .border(width = 1.dp, brush = Brush.horizontalGradient(listOf(Color.DarkGray, Color.DarkGray)), shape = RectangleShape),
+
             onValueChange = { onDescriptionChange(it) },
             label = { Text(text = stringResource(R.string.description)) },
             textStyle = MaterialTheme.typography.bodyLarge,
             singleLine = true,
+            modifier = Modifier
+                .fillMaxSize()
+//                .border(width = 1.dp, brush = Brush.horizontalGradient(listOf(Color.DarkGray, Color.DarkGray)), shape = RectangleShape),
         )
     }
 }

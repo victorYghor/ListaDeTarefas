@@ -69,7 +69,7 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     //Compose navigation
     implementation("androidx.navigation:navigation-compose:2.6.0")
 }
@@ -92,6 +92,8 @@ dependencies {
 
     // System UI - Accompanist
    implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta"
+
+    implementation "androidx.navigation:navigation-compose:2.6.0"
 
     // data store preferences
     implementation "androidx.datastore:datastore-preferences:1.0.0"

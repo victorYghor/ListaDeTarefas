@@ -29,9 +29,9 @@ val HighPriorityColor = Color(0xFFFF4646)
 val MediumPriorityColor = Color(0xFFFFC114)
 val NonePriorityColor = Color(0xFFFFFFFF)
 
-val splashScreenBackground: Color
-    @Composable
-    get() = if (isInDarkMode) DarkGray else LightGray
+//val splashScreenBackground: Color
+//    @Composable
+//    get() = if (isInDarkMode) DarkGray else LightGray
 val isInDarkMode
     @Composable
     get() = isSystemInDarkTheme()
