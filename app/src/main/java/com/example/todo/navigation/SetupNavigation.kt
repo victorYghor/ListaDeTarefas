@@ -20,6 +20,7 @@ fun SetupNavigation(
         Screens(navController = navController)
     }
 
+    // elemento compose
     NavHost(
         navController = navController,
         startDestination = LIST_SCREEN
