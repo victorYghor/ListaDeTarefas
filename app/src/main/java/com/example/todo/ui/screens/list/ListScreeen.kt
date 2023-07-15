@@ -33,7 +33,7 @@ fun ListScreen(
         sharedViewModel.handleDatabaseActions(action)
     }
 
-    val action by sharedViewModel.action
+    val action = sharedViewModel.action
     val sortState by sharedViewModel.sortState.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
@@ -50,12 +50,12 @@ fun ListScreen(
     DisplaySnackBar(
         scaffoldState = scaffoldState,
         handleDatabaseActions = { sharedViewModel.handleDatabaseActions(action = action) },
-        taskTitle = sharedViewModel.title.value,
+        taskTitle = sharedViewModel.title,
         action = action,
         onUndoClicked = {
-            sharedViewModel.action.value = it
+            sharedViewModel.updateAction(it)
         },
-        onComplete = { sharedViewModel.action.value = it }
+        onComplete = { sharedViewModel.updateAction(it)}
     )
 
     Scaffold(
@@ -77,7 +77,7 @@ fun ListScreen(
                 highPriorityTasks = highPriorityTasks,
                 sortState = sortState,
                 onSwipeToDelete = { action, task ->
-                    sharedViewModel.action.value = action
+                    sharedViewModel.updateAction(action)
                     sharedViewModel.updateTaskFields(selectedTask = task)
                     scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 }

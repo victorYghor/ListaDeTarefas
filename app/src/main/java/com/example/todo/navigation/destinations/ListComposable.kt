@@ -36,11 +36,11 @@ fun NavGraphBuilder.listComposable(
         LaunchedEffect(key1 = myAction) {
             if(action != myAction) {
                 myAction = action
-                sharedViewModel.action.value = action
+                sharedViewModel.updateAction(myAction)
             }
 
         }
-        val databaseAction = sharedViewModel.action.value
+        val databaseAction = sharedViewModel.action
         // por que a database tem action?
         ListScreen(
             navigateToTaskScreen = navigateToTaskScreen,

@@ -61,7 +61,7 @@ fun ListAppBar(
                                 sharedViewModel.persistSortingState(it)
                 },
                 onDeleteAllClicked = {
-                    sharedViewModel.action.value = Action.DELETE_ALL
+                    sharedViewModel.updateAction(Action.DELETE_ALL)
                 },
             )
         }

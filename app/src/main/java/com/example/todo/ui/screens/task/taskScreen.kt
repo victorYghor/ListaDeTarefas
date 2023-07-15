@@ -33,9 +33,9 @@ fun TaskScreen(
     sharedViewModel: SharedViewModel
 ) {
     BackHandler(onBackPressed = { navigateToListScreen(Action.NO_ACTION) })
-    val title: String by sharedViewModel.title
-    val description: String by sharedViewModel.description
-    val priority:Priority by sharedViewModel.priority
+    val title: String = sharedViewModel.title
+    val description: String = sharedViewModel.description
+    val priority:Priority = sharedViewModel.priority
 
     val context = LocalContext.current
 
@@ -66,11 +66,11 @@ fun TaskScreen(
                 },
                 description = description,
                 onDescriptionChange = {
-                    sharedViewModel.description.value = it
+                    sharedViewModel.updateDescription(it)
                 },
                 priority = priority,
                 onPrioritySelected = {
-                    sharedViewModel.priority.value = it
+                    sharedViewModel.updatePriority(it)
                 },
                 modifier = Modifier
                     .padding(top = paddingValues.calculateTopPadding())
