@@ -58,12 +58,11 @@ class SharedViewModel @Inject constructor(
             dataStoreRepository.persistSortState(priority = priority)
         }
     }
-
     private val _sortState = MutableStateFlow<RequestState<Priority>>(RequestState.Idle)
 
     val sortState: StateFlow<RequestState<Priority>> = _sortState
 
-    fun readSortState() {
+    private fun readSortState() {
         _sortState.value = RequestState.Loading
 
         try {
@@ -92,6 +91,11 @@ class SharedViewModel @Inject constructor(
             _searchedTasks.value = RequestState.Error(e)
         }
         searchAppBarState.value = SearchAppBarState.TRIGGERED
+    }
+
+    init {
+        getAllTasks()
+        readSortState()
     }
 
     fun getAllTasks() {

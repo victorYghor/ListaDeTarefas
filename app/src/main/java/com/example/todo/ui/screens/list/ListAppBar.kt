@@ -1,5 +1,6 @@
 package com.example.todo.ui.screens.list
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,7 +44,6 @@ import com.example.todo.ui.theme.topAppBarColor
 import com.example.todo.ui.viewModels.SharedViewModel
 import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
-import com.example.todo.util.TrailingIconState
 
 @Composable
 fun ListAppBar(
@@ -67,10 +67,12 @@ fun ListAppBar(
         }
 
         else -> {
+            Log.d("searchAppBar", "this start the app bar state")
             SearchAppBar(
                 text = searchTextState,
                 onTextChange = { newText -> sharedViewModel.searchTextState.value = newText },
                 onCloseClicked = {
+                    Log.d("closeSearch", "click on the close button")
                     sharedViewModel.searchAppBarState.value =
                         SearchAppBarState.CLOSED
                     sharedViewModel.searchTextState.value = ""
@@ -229,10 +231,6 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
-
-    var trailingIconState by remember {
-        mutableStateOf(TrailingIconState.READY_TO_DELETE)
-    }
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -275,21 +273,10 @@ fun SearchAppBar(
             },
             trailingIcon = {
                 IconButton(onClick = {
-                    when (trailingIconState) {
-                        TrailingIconState.READY_TO_DELETE -> {
+                        if (text.isNotEmpty()){
+                // aparentemente onTextChange é uma função que permite que eu mudo qual é valor autual do texto
                             onTextChange("")
-                            trailingIconState = TrailingIconState.READY_TO_CLOSE
-                        }
-
-                        TrailingIconState.READY_TO_CLOSE -> {
-                            if (text.isNotEmpty()) {
-                                onTextChange("")
-                            } else {
-                                onCloseClicked()
-                                trailingIconState = TrailingIconState.READY_TO_DELETE
-                            }
-                        }
-                    }
+                        } else onCloseClicked()
                 }) {
                     Icon(
                         imageVector = Icons.Filled.Close,

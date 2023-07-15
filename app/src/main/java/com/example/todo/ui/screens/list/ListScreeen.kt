@@ -25,10 +25,12 @@ import kotlinx.coroutines.launch
 fun ListScreen(
     navigateToTaskScreen: (Int) -> Unit,
     sharedViewModel: SharedViewModel,
+    action: Action,
 ) {
-    LaunchedEffect(key1 = true) {
-        sharedViewModel.getAllTasks()
-        sharedViewModel.readSortState()
+
+
+    LaunchedEffect(key1 = action) {
+        sharedViewModel.handleDatabaseActions(action)
     }
 
     val action by sharedViewModel.action
@@ -52,7 +54,8 @@ fun ListScreen(
         action = action,
         onUndoClicked = {
             sharedViewModel.action.value = it
-        }
+        },
+        onComplete = { sharedViewModel.action.value = it }
     )
 
     Scaffold(
@@ -76,6 +79,7 @@ fun ListScreen(
                 onSwipeToDelete = { action, task ->
                     sharedViewModel.action.value = action
                     sharedViewModel.updateTaskFields(selectedTask = task)
+                    scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 }
             )
         },
@@ -92,7 +96,8 @@ fun DisplaySnackBar(
     handleDatabaseActions: () -> Unit,
     taskTitle: String,
     action: Action,
-    onUndoClicked: (Action) -> Unit
+    onUndoClicked: (Action) -> Unit,
+    onComplete: (Action) -> Unit
 ) {
 
     handleDatabaseActions()
@@ -111,6 +116,7 @@ fun DisplaySnackBar(
                 )
             }
         }
+        onComplete(Action.NO_ACTION)
     }
 }
 

@@ -2,12 +2,15 @@ package com.example.todo.navigation.destinations
 
 import android.util.Log
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.todo.ui.screens.list.ListScreen
 import com.example.todo.ui.viewModels.SharedViewModel
+import com.example.todo.util.Action
 import com.example.todo.util.Constants.LIST_ARGUMENT_KEY
 import com.example.todo.util.Constants.LIST_SCREEN
 import com.example.todo.util.toAction
@@ -25,12 +28,24 @@ fun NavGraphBuilder.listComposable(
         val action = navBackStackEntry.arguments?.getString(LIST_ARGUMENT_KEY).toAction()
         Log.d("ListComposable", action.name)
 
-        LaunchedEffect(key1 = action) {
-            sharedViewModel.action.value = action
+        var myAction by rememberSaveable {
+            mutableStateOf(Action.NO_ACTION)
         }
+
+        // what this does? why this solve the bug
+        LaunchedEffect(key1 = myAction) {
+            if(action != myAction) {
+                myAction = action
+                sharedViewModel.action.value = action
+            }
+
+        }
+        val databaseAction = sharedViewModel.action.value
+        // por que a database tem action?
         ListScreen(
             navigateToTaskScreen = navigateToTaskScreen,
-            sharedViewModel = sharedViewModel
+            sharedViewModel = sharedViewModel,
+            action = databaseAction,
             )
     }
 }
