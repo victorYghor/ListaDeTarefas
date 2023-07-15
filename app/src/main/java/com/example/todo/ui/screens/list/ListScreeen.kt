@@ -1,5 +1,6 @@
 package com.example.todo.ui.screens.list
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
@@ -31,7 +32,7 @@ fun ListScreen(
         sharedViewModel.readSortState()
     }
 
-    val action by sharedViewModel.action
+    val action by sharedViewModel.action.collectAsState()
     val sortState by sharedViewModel.sortState.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
@@ -44,11 +45,11 @@ fun ListScreen(
 
     val scaffoldState = rememberScaffoldState()
 
-    
+
     DisplaySnackBar(
         scaffoldState = scaffoldState,
         handleDatabaseActions = { sharedViewModel.handleDatabaseActions(action = action) },
-        taskTitle = sharedViewModel.title.value,
+        taskTitle = sharedViewModel.task.collectAsState().value.title,
         action = action,
         onUndoClicked = {
             sharedViewModel.action.value = it
@@ -57,11 +58,11 @@ fun ListScreen(
 
     Scaffold(
         topBar = {
-                 ListAppBar(
-                     sharedViewModel = sharedViewModel,
-                     searchAppBarState = searchAppBarState,
-                     searchTextState = searchTextState
-                 )
+            ListAppBar(
+                sharedViewModel = sharedViewModel,
+                searchAppBarState = searchAppBarState,
+                searchTextState = searchTextState
+            )
         },
         content = { paddingValues ->
             ListContent(
@@ -118,6 +119,8 @@ fun DisplaySnackBar(
 fun ListFab(
     onFabClicked: (taskId: Int) -> Unit
 ) {
+    Log.d("bug", "this is the fab button")
+    // 22:19:45.654
     FloatingActionButton(
         onClick = {
             onFabClicked(-1)
@@ -132,6 +135,7 @@ fun ListFab(
     }
 }
 
+// essa função serve para mandar uma mensagem personalizada dependendo do action
 private fun setMessage(action: Action, taskTitle: String): String {
     return when (action) {
         Action.DELETE_ALL -> "All Tasks Removed."

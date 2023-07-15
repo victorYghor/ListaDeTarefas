@@ -60,6 +60,7 @@ fun TaskScreen(
             )
         },
         content = { paddingValues ->
+            // null InputStream
             TaskContent(
                 title = title,
                 onTitleChange = {
@@ -83,3 +84,4 @@ fun TaskScreen(
 fun displayToast(context: Context) {
     Toast.makeText(context, context.getString(R.string.fields_empty), Toast.LENGTH_SHORT).show()
 }
+

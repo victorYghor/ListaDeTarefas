@@ -126,7 +126,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    private fun addTask() {
+    fun addTask() {
         viewModelScope.launch(Dispatchers.IO) {
             val toDoTask = ToDoTask(
                 title = task.value.title,
