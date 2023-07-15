@@ -31,25 +31,18 @@ class SharedViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
+    var action: MutableStateFlow<Action> = MutableStateFlow(Action.NO_ACTION)
     // here I make a Task to organize my code
-    data class Task(
-        val action: Action = Action.NO_ACTION,
-        val id: Int = 0,
-        val title: String = "",
-        val description: String = "",
-        val priority: Priority = Priority.NONE
-    )
 
-
-    var task = MutableStateFlow()
+    var task = MutableStateFlow(ToDoTask(
+        id = 0,
+        title = "",
+        description = "",
+        priority = Priority.NONE
+    ))
         private set
 
-    ToDoTask(
-    id = task.value.id,
-    title = task.value.title,
-    description = task.value.description,
-    priority = task.value.priority
-    )
+
     val searchAppBarState: MutableState<SearchAppBarState> =
         mutableStateOf(SearchAppBarState.CLOSED)
 
@@ -147,26 +140,14 @@ class SharedViewModel @Inject constructor(
 
     private fun updateTask() {
         viewModelScope.launch(Dispatchers.IO) {
-            val toDoTask = ToDoTask(
-                id = task.value.id,
-                title = task.value.title,
-                description = task.value.description,
-                priority = task.value.priority
-            )
-            repository.updateTask(toDoTask = toDoTask)
+            repository.updateTask(toDoTask = task.value)
         }
     }
 
     private fun deleteTask() {
         viewModelScope.launch {
             // Here I make a task to delete them in the repository, there is some way that I could be use the task that I already made
-            val toDoTask = ToDoTask(
-                id = task.value.id,
-                title = task.value.title,
-                description = task.value.description,
-                priority = task.value.priority
-            )
-            repository.deleteTask(toDoTask = toDoTask)
+            repository.deleteTask(toDoTask = task.value)
         }
     }
 
