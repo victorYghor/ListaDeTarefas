@@ -2,6 +2,7 @@ package com.example.todo.ui.screens.task
 
 import android.content.Context
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -29,11 +30,14 @@ fun TaskScreen(
     selectedTask: ToDoTask?,
     sharedViewModel: SharedViewModel
 ) {
+
     val title: String by sharedViewModel.title
     val description: String by sharedViewModel.description
     val priority:Priority by sharedViewModel.priority
 
     val context = LocalContext.current
+
+    BackHandler(onBack = { navigateToListScreen(Action.NO_ACTION) })
 
     Scaffold(
         topBar = {
