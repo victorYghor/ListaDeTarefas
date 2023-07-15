@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
@@ -26,9 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.example.todo.R
 import com.example.todo.data.models.Priority
@@ -46,11 +50,16 @@ fun PriorityDropDown(
     var expanded by remember { mutableStateOf(false) }
     val angle by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
+    var parentSize by remember { mutableStateOf(IntSize.Zero) }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(TOP_APP_BAR_HEIGHT)
             .clickable(onClick = { expanded = true })
+            .onGloballyPositioned {
+                parentSize = it.size
+            }
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
@@ -86,7 +95,7 @@ fun PriorityDropDown(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier.fillMaxWidth(fraction = 0.94f)
+            modifier = Modifier.width(LocalDensity.current.run { parentSize.width.toDp() })
         ) {
             Priority.values().forEach {
                     DropdownMenuItem (
