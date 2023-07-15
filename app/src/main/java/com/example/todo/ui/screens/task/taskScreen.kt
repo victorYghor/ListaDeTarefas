@@ -3,6 +3,7 @@ package com.example.todo.ui.screens.task
 import android.content.Context
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.compose.runtime.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -31,9 +32,9 @@ fun TaskScreen(
     sharedViewModel: SharedViewModel
 ) {
 
-    val title: String by sharedViewModel.title
-    val description: String by sharedViewModel.description
-    val priority:Priority by sharedViewModel.priority
+    val title: String = sharedViewModel.task.collectAsState().value.title
+    val description: String = sharedViewModel.task.collectAsState().value.description
+    val priority:Priority = sharedViewModel.task.collectAsState().value.priority
 
     val context = LocalContext.current
 
@@ -66,11 +67,11 @@ fun TaskScreen(
                 },
                 description = description,
                 onDescriptionChange = {
-                    sharedViewModel.description.value = it
+                    sharedViewModel.updateDescription(it)
                 },
                 priority = priority,
                 onPrioritySelected = {
-                    sharedViewModel.priority.value = it
+                    sharedViewModel.updatePriority(it)
                 },
                 modifier = Modifier
                     .padding(top = paddingValues.calculateTopPadding())
