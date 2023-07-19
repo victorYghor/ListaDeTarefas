@@ -50,7 +50,7 @@ fun EmptyContent() {
             text = stringResource(R.string.no_tasks_found),
             color = textColor,
             fontWeight = FontWeight.Bold,
-            fontSize = MaterialTheme.typography.titleSmall.fontSize
+            fontSize = MaterialTheme.typography.titleLarge.fontSize
         )
 
     }

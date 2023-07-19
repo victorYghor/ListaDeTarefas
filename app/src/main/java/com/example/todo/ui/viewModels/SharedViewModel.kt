@@ -28,7 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository,
-    private val dataStoreRepository: DataStoreRepository
+    private val dataStoreRepository: DataStoreRepository,
 ) : ViewModel() {
 
     var action: MutableStateFlow<Action> = MutableStateFlow(Action.NO_ACTION)
@@ -208,7 +208,7 @@ class SharedViewModel @Inject constructor(
 
     fun updateDescription(newDescription: String) {
         if (newDescription.length < MAX_TITLE_LENGTH) {
-            task.update { it -> it.copy(title = newDescription) }
+            task.update { it -> it.copy(description = newDescription) }
         }
     }
 
