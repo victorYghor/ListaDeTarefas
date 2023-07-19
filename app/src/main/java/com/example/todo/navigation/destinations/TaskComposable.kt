@@ -35,8 +35,9 @@ fun NavGraphBuilder.taskComposable(
         var selectedTask = sharedViewModel.selectedTask.collectAsState().value
 
         LaunchedEffect(key1 = selectedTask) {
-            if (selectedTask != null) {
-                sharedViewModel.updateTaskFields(selectedTask = selectedTask!!)
+            selectedTask.takeIf { selectedTask != null }
+            selectedTask?.let {
+                sharedViewModel.updateTaskFields(selectedTask = selectedTask)
             }
         }
         Log.d("TaskComposable", taskId.toString())

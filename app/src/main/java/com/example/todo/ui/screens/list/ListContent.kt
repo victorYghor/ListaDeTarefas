@@ -39,7 +39,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.todo.R
 import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoTask
@@ -47,7 +46,6 @@ import com.example.todo.ui.theme.HighPriorityColor
 import com.example.todo.ui.theme.LARGEST_PADDING
 import com.example.todo.ui.theme.P_LARGE
 import com.example.todo.ui.theme.P_PRIORITY
-import com.example.todo.ui.theme.P_SMALL
 import com.example.todo.ui.theme.TASK_ITEM_ELEVATION
 import com.example.todo.ui.theme.taskItemBackgroundColor
 import com.example.todo.ui.theme.textColor
@@ -55,12 +53,11 @@ import com.example.todo.util.Action
 import com.example.todo.util.RequestState
 import com.example.todo.util.SearchAppBarState
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @Composable
 fun ListContent(
     allTasks: RequestState<List<ToDoTask>>,
-    navigateToTaskScreen: (taskId: Int) -> Unit,
+    navigateToTaskScreen: taskRoute,
     modifier: Modifier,
     searchedTasks: RequestState<List<ToDoTask>>,
     searchAppBarState: SearchAppBarState,
@@ -114,18 +111,15 @@ fun ListContent(
 fun HandleListContent(
     tasks: List<ToDoTask>,
     navigateToTaskScreen: (taskId: Int) -> Unit,
-    onSwipeToDelete: (Action, ToDoTask) -> Unit
+    onSwipeToDelete: (Action, ToDoTask) -> Unit,
+    viewModel: HandleListViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ) {
-    if (tasks.isEmpty()) {
-        EmptyContent()
-    } else {
-        DisplayTasks(
-            tasks = tasks,
-            navigateToTaskScreen = navigateToTaskScreen,
-            onSwipeToDelete = onSwipeToDelete
-        )
-    }
+
+    // eu vou usar essa função
+    check(tasks, navigateToTaskScreen, onSwipeToDelete)
 }
+
+
 
 @Composable
 fun RedBackground(degrees: Float) {

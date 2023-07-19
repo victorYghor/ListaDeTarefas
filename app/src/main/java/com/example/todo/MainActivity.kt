@@ -19,7 +19,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.todo.navigation.SetupNavigation
-import com.example.todo.ui.screens.list.ListScreen
 import com.example.todo.ui.theme.TodoTheme
 import com.example.todo.ui.viewModels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
