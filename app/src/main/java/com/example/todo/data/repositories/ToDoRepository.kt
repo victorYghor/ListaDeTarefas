@@ -6,8 +6,10 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+// TODO why I need a todoRepository?
 @ViewModelScoped
 class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
+    // TODO is a good practice make in this way  is not better make a data class that unify this information?
     val getAllTasks: Flow<List<ToDoTask>> = toDoDao.getAllTasks()
     val sortByLowPriority = toDoDao.sortByLowPriority()
     val sortByHighPriority = toDoDao.sortByHighPriority()

@@ -32,7 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todo.R
-import com.example.todo.components.PriorityDropDown
+import com.example.todo.ui.components.PriorityDropDown
 import com.example.todo.data.models.Priority
 import com.example.todo.ui.theme.P_LARGE
 import com.example.todo.ui.theme.P_MEDIUM

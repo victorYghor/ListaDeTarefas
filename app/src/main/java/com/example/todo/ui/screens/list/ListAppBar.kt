@@ -33,8 +33,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.todo.R
-import com.example.todo.components.DisplayAlertDialog
-import com.example.todo.components.PriorityItem
+import com.example.todo.ui.components.DisplayAlertDialog
+import com.example.todo.ui.components.PriorityItem
 import com.example.todo.data.models.Priority
 import com.example.todo.ui.theme.P_LARGE
 import com.example.todo.ui.theme.TOP_APP_BAR_HEIGHT

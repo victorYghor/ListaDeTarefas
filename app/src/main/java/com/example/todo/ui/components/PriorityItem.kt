@@ -1,4 +1,4 @@
-package com.example.todo.components
+package com.example.todo.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Row

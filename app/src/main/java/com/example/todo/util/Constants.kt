@@ -11,6 +11,7 @@ object Constants {
     const val TASK_ARGUMENT_KEY = "taskId"
     const val MAX_TITLE_LENGTH = 100
 
+    // TODO why I need this string?
     const val PREFERENCE_NAME = "todo_preferences"
     const val PREFERENCE_KEY = "sort_state"
     const val SPLASH_SCREEN = "splash"

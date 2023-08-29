@@ -1,4 +1,4 @@
-package com.example.todo.components
+package com.example.todo.ui.components
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button

@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.room.Delete
 import com.example.todo.R
-import com.example.todo.components.DisplayAlertDialog
+import com.example.todo.ui.components.DisplayAlertDialog
 import com.example.todo.data.models.Priority
 import com.example.todo.data.models.ToDoTask
 import com.example.todo.ui.theme.textColor

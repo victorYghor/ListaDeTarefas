@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
+// TODO What this does? why I need pass this string?
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCE_NAME)
 
 @ViewModelScoped
@@ -27,18 +28,20 @@ class DataStoreRepository @Inject constructor(
 ){
     // create a object to access the sortKey
     private object PreferenceKeys {
-        // what mean preference key
+        // TODO what means preference key?
         val sortKey = stringPreferencesKey(name = PREFERENCE_KEY)
     }
 
     private val dataStore = context.dataStore
 
     suspend fun persistSortState(priority: Priority) {
+        // TODO Why priority is store in a different way?
         dataStore.edit { preference ->
             preference[PreferenceKeys.sortKey] = priority.name
         }
     }
 
+    // TODO what this data property does?
     val readSortState: Flow<String> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -47,6 +50,7 @@ class DataStoreRepository @Inject constructor(
                 throw exception
             }
         }
+        // TODO why I am doing this transformation ?
         .map { preferences ->
             val sortState = preferences[PreferenceKeys.sortKey] ?: Priority.NONE.name
             sortState

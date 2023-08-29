@@ -15,14 +15,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataBaseModule {
 
+    // TODO this build a data base?
     @Singleton
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(
-        context,
-        ToDoDatabase::class.java,
-        DATABASE_NAME
+        context = context,
+        klass = ToDoDatabase::class.java,
+        name = DATABASE_NAME
     ).build()
 
     @Singleton
