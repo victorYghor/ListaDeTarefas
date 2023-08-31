@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.smallTopAppBarColors
 import androidx.compose.runtime.*
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -61,7 +62,7 @@ fun NewTaskAppBar(
         actions = {
             AddAction(onAddClicked = navigateToListScreen)
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = topAppBarColor)
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = topAppBarColor)
     )
 }
 
@@ -146,6 +147,9 @@ fun DeleteAction(
         )
     }
 }
+
+
+//  todo I really need separet this functions and composables?
 
 @Composable
 fun UpdateAction(

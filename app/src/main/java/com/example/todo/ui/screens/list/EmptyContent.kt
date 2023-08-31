@@ -26,6 +26,9 @@ import com.example.todo.R
 import com.example.todo.ui.theme.iconColors
 import com.example.todo.ui.theme.textColor
 
+/**
+ * Show empty content when the app don't have tasks yet
+ * **/
 @Composable
 fun EmptyContent() {
     Column(

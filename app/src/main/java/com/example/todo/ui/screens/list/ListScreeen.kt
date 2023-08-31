@@ -32,6 +32,8 @@ fun ListScreen(
         sharedViewModel.readSortState()
     }
 
+    // TODO I need use a data class here?
+
     val action by sharedViewModel.action.collectAsState()
     val sortState by sharedViewModel.sortState.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
@@ -135,6 +137,7 @@ fun ListFab(
     }
 }
 
+// todo I need create a view model for this actions?
 // essa função serve para mandar uma mensagem personalizada dependendo do action
 private fun setMessage(action: Action, taskTitle: String): String {
     return when (action) {

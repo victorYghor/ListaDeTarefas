@@ -45,6 +45,7 @@ import com.example.todo.util.Action
 import com.example.todo.util.SearchAppBarState
 import com.example.todo.util.TrailingIconState
 
+// TODO how can I solve this logic inside of the composable for better practices?
 @Composable
 fun ListAppBar(
     sharedViewModel: SharedViewModel,
@@ -105,8 +106,7 @@ fun DefaultListAppBar(
                 onDeleteAllConfirmed = onDeleteAllClicked
             )
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = topAppBarColor),
-
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = topAppBarColor)
         )
 }
 
@@ -275,6 +275,7 @@ fun SearchAppBar(
             },
             trailingIcon = {
                 IconButton(onClick = {
+                    // todo logic for the search top app bar
                     when (trailingIconState) {
                         TrailingIconState.READY_TO_DELETE -> {
                             onTextChange("")

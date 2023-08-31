@@ -54,6 +54,10 @@ import com.example.todo.util.RequestState
 import com.example.todo.util.SearchAppBarState
 import kotlinx.coroutines.delay
 
+// TODO how can I solve this logic inside of the composable for better practices?
+/***
+ * this dealing with the tasks and what kind of tasks is need to show
+ */
 @Composable
 fun ListContent(
     allTasks: RequestState<List<ToDoTask>>,
