@@ -38,5 +38,5 @@ class ToDoRepository @Inject constructor(private val toDoDao: ToDoDao) {
         toDoDao.deleteAllTasks()
     }
 
-    fun searchDatabase(searchQuery: String) = toDoDao.searchDatabase(searchQuery)
+    suspend fun searchDatabase(searchQuery: String) = toDoDao.searchDatabase(searchQuery)
 }
